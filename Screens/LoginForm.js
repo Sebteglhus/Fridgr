@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import {Button, Text, View, TextInput, ActivityIndicator, StyleSheet, Pressable} from 'react-native';
+import {Button, Text, View, TextInput, ActivityIndicator, StyleSheet, Pressable, KeyboardAvoidingView } from 'react-native';
 
 
 
-function LoginForm(){
+const LoginForm = () => {
     const auth = getAuth();
     //state variable
     const [email, setEmail] = useState('')
@@ -27,7 +27,6 @@ function LoginForm(){
         }
 
     }
-
     return (
         <View>
             {/*overskrift*/}
@@ -60,8 +59,12 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
     },
+    baseText: {
+        fontFamily: "Verdana"
+      },
     header: {
         fontSize: 40,
+        textAlign: 'center'
     },
 });
 export default LoginForm

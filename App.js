@@ -1,36 +1,28 @@
+//general imports
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState} from 'react';
+
+import React from 'react';
+import { useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Card } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
 
-import firebase from 'firebase/compat/app';
+//firebase imports
 import { getAuth } from "firebase/auth";
-import { initializeApp } from 'firebase/app';
+import firebaseSetup from './API/firebaseSetup'
 
-import SignUpForm from './Screens/SignUp';
-import LoginForm from './Screens/LoginForm';
-import ProfileScreen from './Screens/ProfileScreen'
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCUVlvZvWfyWC4OqkfmQxSKFgCvdlOpGd4",
-  authDomain: "supreme-carnival.firebaseapp.com",
-  projectId: "supreme-carnival",
-  storageBucket: "supreme-carnival.appspot.com",
-  messagingSenderId: "889213915209",
-  appId: "1:889213915209:web:eb4f65b2ca747d8b8b2f98"
-};
+//component imports
+import GuestPage from './Screens/GuestPage'
+import AddFridge from './Screens/AddFridge';
+import FridgeScreen from './Screens/FridgeScreen';
+import ProfileScreen from './Screens/ProfileScreen';
+import Tabs from './Navigation/tabs';
 
 
 export default function App() {
-  //user const sættes
+  //user const defined
   const [user, setUser] = useState({ loggedIn: false });
 
-  //firebase intialization
-  if (!firebase.apps.length) {
-    initializeApp(firebaseConfig);
-    console.log("firebase initiated");
-  }
-
+  firebaseSetup();
   //logged in?
   function onAuthStateChange(callback) {
     return getAuth().onAuthStateChanged(user => {
@@ -47,33 +39,17 @@ export default function App() {
         unsubscribe();
       };
     }, []);
-
-    //Guestpage
-    const GuestPage = () => {
-      return(
-          <View style={styles.container}>
-            <Text style={styles.paragraph}>
-              Opret eller Login med din firebase Email
-            </Text>
-  
-            <Card style={{padding:20}}>
-              <SignUpForm />
-            </Card>
-  
-            <Card style={{padding:20}}>
-              <LoginForm />
-            </Card>
-  
-          </View>
-      )
-    }
     if (user.loggedIn == true) {
+      
       return (
-        < ProfileScreen />
+        <NavigationContainer>
+          <Tabs />
+        </NavigationContainer>
+
       )
     } else {
       return(
-        < GuestPage />
+        <GuestPage />
       )
     }
 }
@@ -84,6 +60,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  baseText: {
+    fontFamily: "Verdana"
   },
   paragraph: {
     margin: 24,

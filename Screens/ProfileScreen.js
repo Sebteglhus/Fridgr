@@ -3,7 +3,7 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import { getAuth, signOut } from "firebase/auth";
 
 //profile view
-function ProfileScreen () {
+const ProfileScreen = () => {
     const auth = getAuth();
     const handleLogOut = async () => {
         await signOut(auth).then(() => {
@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#ecf0f1',
         padding: 8,
     },
+    baseText: {
+        fontFamily: "Verdana"
+      },
 });
 
 export default ProfileScreen

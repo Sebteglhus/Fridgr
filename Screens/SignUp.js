@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import {Button, Text, View, TextInput, ActivityIndicator, StyleSheet, Pressable} from 'react-native';
 
-function SignUpForm(){
+const SignUpForm = () => {
     //state variable
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -28,7 +28,6 @@ function SignUpForm(){
         }
 
     }
-
     //the actual page
     return (
         <View>
@@ -65,6 +64,7 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 40,
+        textAlign: 'center'
     },
     Button: {
         alignItems: 'center',
@@ -73,7 +73,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
+      },
+      baseText: {
+        fontFamily: "Verdana"
       },
 });
 export default SignUpForm
